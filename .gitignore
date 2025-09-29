@@ -1,0 +1,29 @@
+# 小程序相关
+*.log
+logs/
+.mini/
+.project/
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 开发工具相关
+.project/
+.svn/
+node_modules/
+dist/
+build/
+
+# 系统文件
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.temp
+
+# TypeScript编译文件（如果有的话）
+*.js
+*.js.map
