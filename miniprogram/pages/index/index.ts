@@ -1,54 +1,34 @@
-// index.ts
-// 获取应用实例
-const app = getApp<IAppOption>()
-const defaultAvatarUrl = 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-
-Component({
+// pages/index/index.ts
+Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {
-      avatarUrl: defaultAvatarUrl,
-      nickName: '',
-    },
-    hasUserInfo: false,
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    maps: [] as Array<{id: string, name: string, image: string}>
   },
-  methods: {
-    // 事件处理函数
-    bindViewTap() {
-      wx.navigateTo({
-        url: '../logs/logs',
-      })
-    },
-    onChooseAvatar(e: any) {
-      const { avatarUrl } = e.detail
-      const { nickName } = this.data.userInfo
-      this.setData({
-        "userInfo.avatarUrl": avatarUrl,
-        hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-      })
-    },
-    onInputChange(e: any) {
-      const nickName = e.detail.value
-      const { avatarUrl } = this.data.userInfo
-      this.setData({
-        "userInfo.nickName": nickName,
-        hasUserInfo: nickName && avatarUrl && avatarUrl !== defaultAvatarUrl,
-      })
-    },
-    getUserProfile() {
-      // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-      wx.getUserProfile({
-        desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-        success: (res) => {
-          console.log(res)
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    },
+
+  onLoad() {
+    // 模拟地图数据（12张地图）
+    const mockMaps = [
+      { id: 'map1', name: '霓虹町', image: '/images/maps/nihong.jpg' },
+      { id: 'map2', name: '裂变峡谷', image: '/images/maps/liebian.jpg' },
+      { id: 'map3', name: '隐世修所', image: '/images/maps/yinshi.jpg' },
+      { id: 'map4', name: '亚海悬城', image: '/images/maps/yahai.jpg' },
+      { id: 'map5', name: '莲华古城', image: '/images/maps/lianhua.jpg' },
+      { id: 'map6', name: '微风岛屿', image: '/images/maps/weifeng.jpg' },
+      { id: 'map7', name: '深海明珠', image: '/images/maps/shenhai.jpg' },
+      { id: 'map8', name: '森寒冬港', image: '/images/maps/senhan.jpg' },
+      { id: 'map9', name: '盐海矿镇', image: '/images/maps/yanhai.png' },
+      { id: 'map10', name: '日落之城', image: '/images/maps/riluo.png' },
+      { id: 'map11', name: '源工重镇', image: '/images/maps/yuangong.jpg' },
+      { id: 'map12', name: '幽邃地窟', image: '/images/maps/yousui.png' }
+    ];
+    this.setData({
+      maps: mockMaps
+    });
   },
-})
+
+  selectMap(e: any) {
+    const mapId = e.currentTarget.dataset.mapId;
+    wx.navigateTo({
+      url: `/pages/maps/maps?mapId=${mapId}`
+    });
+  }
+});

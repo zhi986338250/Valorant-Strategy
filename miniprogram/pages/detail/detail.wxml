@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="header">
+    <button class="back-btn" bindtap="goBack">返回</button>
+    <text class="title">点位详情</text>
+  </view>
+  
+  <view class="detail-section">
+    <image class="strategy-image" src="{{strategy.image}}" mode="widthFix"></image>
+    <view class="description-section">
+      <text class="desc-text">{{strategy.description}}</text>
+    </view>
+  </view>
+</view>

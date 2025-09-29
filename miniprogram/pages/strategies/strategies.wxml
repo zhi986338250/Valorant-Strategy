@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="header">
+    <button class="back-btn" bindtap="goBack">返回</button>
+    <text class="title">选择点位</text>
+  </view>
+  
+  <view class="strategies-section">
+    <scroll-view class="strategies-list" scroll-y="true">
+      <view class="strategy-item" bindtap="selectStrategy" data-strategy-id="{{item.id}}" 
+            wx:for="{{strategies}}" wx:key="id">
+        <view class="strategy-content">
+          <text class="strategy-name">{{item.name}}</text>
+          <text class="strategy-desc">{{item.description}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

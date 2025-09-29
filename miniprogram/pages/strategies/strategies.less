@@ -1,0 +1,72 @@
+.container {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  position: relative; /* 相对定位 */
+  justify-content: space-between; /* 改为两端对齐 */
+  margin-bottom: 20px;
+  height: 44px;
+
+
+  .back-btn {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px; /* 进一步减小内边距 */
+    margin-right: 12px;
+    font-size: 18px;
+    flex-shrink: 0;
+    position: absolute; /* 绝对定位到左边 */
+    min-width: auto; /* 移除最小宽度限制 */
+    width: auto; /* 让按钮宽度自适应 */
+    box-sizing: border-box; /* 确保padding不会增加总宽度 */
+    z-index: 1; /* 确保按钮在标题上方 */
+  }
+
+  .title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    width: 100%; /* 占满整个header宽度 */
+    text-align: center; /* 标题居中 */
+    margin: 0; /* 为标题添加左右边距，避免与按钮重叠 */
+  }
+}
+
+.strategies-section {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+
+  .strategies-list {
+    height: 400px;
+  }
+
+  .strategy-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+
+    .strategy-content {
+      .strategy-name {
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .strategy-desc {
+        display: block;
+        font-size: 14px;
+        color: #666;
+        line-height: 1.4;
+      }
+    }
+  }
+}

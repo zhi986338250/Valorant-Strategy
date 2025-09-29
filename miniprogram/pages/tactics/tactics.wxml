@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="header">
+    <button class="back-btn" bindtap="goBack">返回</button>
+    <text class="title">选择攻守</text>
+  </view>
+  
+  <view class="tactics-section">
+    <button class="tactic-btn attack" bindtap="selectTactic" data-tactic="attack">
+      进攻
+    </button>
+    <button class="tactic-btn defense" bindtap="selectTactic" data-tactic="defense">
+      防守
+    </button>
+  </view>
+</view>

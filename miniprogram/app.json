@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/maps/maps",
-    "pages/heroes/heroes",
     "pages/tactics/tactics",
     "pages/strategies/strategies",
     "pages/detail/detail"
@@ -10,7 +9,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#4A90E2",
-    "navigationBarTitleText": "攻略宝典",
+    "navigationBarTitleText": "Valorant Strategy",
     "navigationBarTextStyle": "white"
   },
   "style": "v2",

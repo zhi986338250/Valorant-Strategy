@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="header">
+    <button class="back-btn" bindtap="goBack">返回</button>
+    <text class="title">选择英雄</text>
+  </view>
+  
+  <view class="category-section">
+    <scroll-view class="category-list" scroll-x="true" show-scrollbar="false">
+      <view class="category-item {{selectedCategory == item ? 'active' : ''}}" 
+            bindtap="selectCategory" data-category="{{item}}" wx:for="{{categories}}" wx:key="index">
+        {{item}}
+      </view>
+    </scroll-view>
+  </view>
+  
+  <view class="heroes-section">
+    <scroll-view class="heroes-list" scroll-y="true">
+      <view class="hero-item" bindtap="selectHero" data-hero-id="{{item.id}}" 
+            wx:for="{{filteredHeroes}}" wx:key="id">
+        <image class="hero-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <view class="hero-info">
+          <text class="hero-name">{{item.name}}</text>
+          <text class="hero-category">{{item.category}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
