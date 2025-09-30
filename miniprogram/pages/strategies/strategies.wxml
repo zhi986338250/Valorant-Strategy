@@ -1,17 +1,32 @@
 <view class="container">
   <view class="header">
     <button class="back-btn" bindtap="goBack">返回</button>
-    <text class="title">选择点位</text>
+    <view class="title-section">
+      <text class="hero-name">{{heroName}}</text>
+      <text class="map-name">{{mapName}}</text>
+      <text class="tactic-name">{{tactic == 'attack' ? '进攻' : '防守'}}</text>
+    </view>
   </view>
   
-  <view class="strategies-section">
-    <scroll-view class="strategies-list" scroll-y="true">
-      <view class="strategy-item" bindtap="selectStrategy" data-strategy-id="{{item.id}}" 
-            wx:for="{{strategies}}" wx:key="id">
-        <view class="strategy-content">
-          <text class="strategy-name">{{item.name}}</text>
-          <text class="strategy-desc">{{item.description}}</text>
+  <view class="points-section">
+    <scroll-view class="points-list" scroll-y="true">
+      <!-- 添加调试信息 -->
+      <text>点位数量: {{points.length}}</text>
+      
+      <view class="point-item" bindtap="selectPoint" data-point-id="{{item.id}}" 
+            wx:for="{{points}}" wx:key="id">
+        <view class="point-header">
+          <text class="point-title">{{item.title}}</text>
         </view>
+        <text class="point-desc">{{item.description}}</text>
+        <view class="point-tags">
+          <text class="tag" wx:for="{{item.tags}}" wx:key="index">{{item}}</text>
+        </view>
+      </view>
+      
+      <!-- 如果没有点位，显示提示 -->
+      <view wx:if="{{points.length === 0}}" class="empty-state">
+        <text>暂无相关攻略点位</text>
       </view>
     </scroll-view>
   </view>
