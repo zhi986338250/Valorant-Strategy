@@ -1,13 +1,49 @@
 <view class="container">
   <view class="header">
     <button class="back-btn" bindtap="goBack">返回</button>
-    <text class="title">点位详情</text>
+    <view class="title-section">
+      <text class="hero-name">{{heroName}}</text>
+      <text class="map-name">{{mapName}}</text>
+      <text class="tactic-name">{{tacticName}}</text>
+    </view>
   </view>
   
   <view class="detail-section">
-    <image class="strategy-image" src="{{strategy.image}}" mode="widthFix"></image>
-    <view class="description-section">
-      <text class="desc-text">{{strategy.description}}</text>
+    <text class="point-title">{{point.title}}</text>
+    
+    <view class="point-tags">
+      <text class="tag" wx:for="{{point.tags}}" wx:key="index">{{item}}</text>
+    </view>
+    
+    <!-- 多图片多描述展示 -->
+    <view class="content-section">
+      <!-- 主要内容：图片和描述交替显示 -->
+      <view wx:if="{{point.detailImages.length > 0 && point.detailDescs.length > 0}}">
+        <!-- 确保以图片数量为基准循环 -->
+        <view class="image-desc-pair" wx:for="{{point.detailImages}}" wx:for-item="image" wx:for-index="index" wx:key="index">
+          <image class="strategy-image" src="{{image}}" mode="widthFix" bindtap="previewImage" data-index="{{index}}"></image>
+          <view class="image-tip">点击图片可放大查看</view>
+          <!-- 对应的描述文本 -->
+          <view class="desc-section">
+            <text class="desc-text">{{point.detailDescs[index] || '暂无描述'}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 如果只有描述没有图片 -->
+      <view wx:if="{{point.detailImages.length === 0 && point.detailDescs.length > 0}}" class="desc-only-section">
+        <view class="desc-section" wx:for="{{point.detailDescs}}" wx:for-item="desc" wx:for-index="index" wx:key="index">
+          <text class="desc-text">{{desc}}</text>
+        </view>
+      </view>
+      
+      <!-- 如果只有图片没有描述 -->
+      <view wx:if="{{point.detailImages.length > 0 && point.detailDescs.length === 0}}" class="image-only-section">
+        <view class="image-section" wx:for="{{point.detailImages}}" wx:for-item="image" wx:for-index="index" wx:key="index">
+          <image class="strategy-image" src="{{image}}" mode="widthFix" bindtap="previewImage" data-index="{{index}}"></image>
+          <view class="image-tip">点击图片可放大查看</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

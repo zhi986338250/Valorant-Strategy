@@ -6,8 +6,8 @@ Page({
       id: '',
       title: '',
       description: '',
-      detailImage: '',
-      detailDesc: '',
+      detailImages: [] as string[],
+      detailDescs: [] as string[], 
       tags: [] as string[],
       mapId: '',
       heroId: '',
@@ -15,10 +15,12 @@ Page({
     },
     heroName: '',
     mapName: '',
-    tacticName: ''
+    tacticName: '',
+    currentImageIndex: 0  // 当前显示的图片索引
   },
 
   onLoad(options: any) {
+    console.log('详情页参数:', options);
     const pointId = options.pointId;
     this.loadPointDetail(pointId);
   },
@@ -27,12 +29,65 @@ Page({
     // 直接根据点位ID获取详情
     const pointDetail = strategyManager.getPointDetail(pointId);
     
+    console.log('获取到的点位详情:', pointDetail);
+    
     if (pointDetail) {
+      // 确保 detailImages 和 detailDescs 是数组格式
+      const detailImages = Array.isArray(pointDetail.detailImages) 
+        ? pointDetail.detailImages 
+        : [pointDetail.detailImage || ''];
+      
+      const detailDescs = Array.isArray(pointDetail.detailDescs) 
+        ? pointDetail.detailDescs 
+        : [pointDetail.detailDesc || ''];
+      
       this.setData({
-        point: pointDetail,
+        point: {
+          ...pointDetail,
+          detailImages: detailImages,
+          detailDescs: detailDescs
+        },
         heroName: this.getHeroName(pointDetail.heroId),
         mapName: this.getMapName(pointDetail.mapId),
         tacticName: pointDetail.tactic === 'attack' ? '进攻' : '防守'
+      });
+    } else {
+      console.error('未找到点位详情:', pointId);
+    }
+  },
+
+  // 预览当前图片
+  previewImage(e: any) {
+    // 获取当前点击图片的索引（通过data-index传递）
+    const index = e.currentTarget.dataset.index || this.data.currentImageIndex;
+    const images = this.data.point.detailImages;
+    
+    wx.previewImage({
+      current: images[index],  // 预览当前点击的图片
+      urls: images
+    });
+  },
+
+  // 切换到下一张图片
+  nextImage() {
+    const images = this.data.point.detailImages;
+    if (images.length > 1) {
+      const nextIndex = (this.data.currentImageIndex + 1) % images.length;
+      this.setData({
+        currentImageIndex: nextIndex
+      });
+    }
+  },
+
+  // 切换到上一张图片
+  prevImage() {
+    const images = this.data.point.detailImages;
+    if (images.length > 1) {
+      const prevIndex = this.data.currentImageIndex === 0 
+        ? images.length - 1 
+        : this.data.currentImageIndex - 1;
+      this.setData({
+        currentImageIndex: prevIndex
       });
     }
   },
@@ -86,13 +141,6 @@ Page({
       'map12': '幽邃地窟',
     };
     return mapNames[mapId] || '未知地图';
-  },
-
-  previewImage() {
-    wx.previewImage({
-      current: this.data.point.detailImage,
-      urls: [this.data.point.detailImage]
-    });
   },
 
   goBack() {
