@@ -5,14 +5,35 @@ Page({
     filteredHeroes: [] as Array<{id: string, name: string, avatar: string, category: string}>,
     categories: ['全部', '先锋', '决斗', '哨位', '控场'],
     selectedCategory: '全部',
-    mapId: ''
+    mapId: '',
+    mapName:''
   },
 
-  onLoad(options: any) {
+    onLoad(options: any) {
     this.setData({
       mapId: options.mapId
     });
+    this.loadMapInfo();
     this.loadHeroes();
+  },
+
+    loadMapInfo() {
+    // 根据mapId获取地图名称
+    // 这里可以优化为从数据源获取
+    const mapName = this.getMapName(this.data.mapId);
+    this.setData({
+      mapName: mapName
+    });
+  },
+
+    getMapName(mapId: string): string {
+    // 模拟数据，实际项目中从数据源获取
+    const mapNames: Record<string, string> = {
+      'map1': '霓虹町',
+      'map2': '裂变峡谷',
+      // ... 其他地图名称
+    };
+    return mapNames[mapId] || '未知地图';
   },
 
   loadHeroes() {

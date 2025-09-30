@@ -5,6 +5,10 @@ Page({
   },
 
   onLoad() {
+    this.loadMaps();
+  },
+
+  loadMaps() {
     // 模拟地图数据（12张地图）
     const mockMaps = [
       { id: 'map1', name: '霓虹町', image: 'https://valorant-strategy.oss-cn-heyuan.aliyuncs.com/images/maps/nihong.jpg' },
